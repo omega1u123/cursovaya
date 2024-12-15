@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Управление товарами - ZALUPA</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="manage-products.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">ZALUPA</div>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Поиск...">
+                <button class="search-button">
+                    <img src="search-icon.svg" alt="Поиск">
+                </button>
+            </div>
+            <div class="nav-buttons">
+                <button class="login-btn">Войти</button>
+                <a href="#" class="instagram-icon">
+                    <img src="instagram-icon.svg" alt="Instagram">
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main class="manage-page">
+        <div class="manage-container">
+            <div class="manage-header">
+                <h1>Управление товарами</h1>
+                <div class="header-actions">
+                    <div class="filter-group">
+                        <select class="filter-select">
+                            <option value="">Все категории</option>
+                            <option value="clothes">Одежда</option>
+                            <option value="tech">Техника</option>
+                            <option value="accessories">Аксессуары</option>
+                        </select>
+                        <select class="filter-select">
+                            <option value="">Сортировка</option>
+                            <option value="price-asc">Цена ↑</option>
+                            <option value="price-desc">Цена ↓</option>
+                            <option value="name-asc">Название А-Я</option>
+                            <option value="name-desc">Название Я-А</option>
+                        </select>
+                    </div>
+                    <a href="add-product.html" class="add-btn">Добавить товар</a>
+                </div>
+            </div>
+
+            <div class="products-table">
+                <div class="table-header">
+                    <div class="col-checkbox">
+                        <input type="checkbox" id="select-all">
+                    </div>
+                    <div class="col-image">Фото</div>
+                    <div class="col-name">Название</div>
+                    <div class="col-category">Категория</div>
+                    <div class="col-price">Цена</div>
+                    <div class="col-status">Статус</div>
+                    <div class="col-actions">Действия</div>
+                </div>
+
+                <div class="table-row">
+                    <div class="col-checkbox">
+                        <input type="checkbox">
+                    </div>
+                    <div class="col-image">
+                        <div class="product-image"></div>
+                    </div>
+                    <div class="col-name">Название товара</div>
+                    <div class="col-category">Одежда</div>
+                    <div class="col-price">250 $</div>
+                    <div class="col-status">
+                        <span class="status-badge active">Активен</span>
+                    </div>
+                    <div class="col-actions">
+                        <button class="action-btn edit-btn">
+                            <img src="edit-icon.svg" alt="Редактировать">
+                        </button>
+                        <button class="action-btn delete-btn">
+                            <img src="delete-icon.svg" alt="Удалить">
+                        </button>
+                        <button class="action-btn stats-btn">
+                            <img src="stats-icon.svg" alt="Статистика">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-row">
+                    <div class="col-checkbox">
+                        <input type="checkbox">
+                    </div>
+                    <div class="col-image">
+                        <div class="product-image"></div>
+                    </div>
+                    <div class="col-name">Название товара</div>
+                    <div class="col-category">Техника</div>
+                    <div class="col-price">250 $</div>
+                    <div class="col-status">
+                        <span class="status-badge inactive">Неактивен</span>
+                    </div>
+                    <div class="col-actions">
+                        <button class="action-btn edit-btn">
+                            <img src="edit-icon.svg" alt="Редактировать">
+                        </button>
+                        <button class="action-btn delete-btn">
+                            <img src="delete-icon.svg" alt="Удалить">
+                        </button>
+                        <button class="action-btn stats-btn">
+                            <img src="stats-icon.svg" alt="Статистика">
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-footer">
+                <div class="bulk-actions">
+                    <select class="bulk-action-select">
+                        <option value="">Действия с выбранными</option>
+                        <option value="delete">Удалить</option>
+                        <option value="activate">Активировать</option>
+                        <option value="deactivate">Деактивировать</option>
+                    </select>
+                    <button class="apply-btn">Применить</button>
+                </div>
+                <div class="pagination">
+                    <button class="page-btn">&lt;</button>
+                    <button class="page-btn active">1</button>
+                    <button class="page-btn">2</button>
+                    <button class="page-btn">3</button>
+                    <button class="page-btn">&gt;</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="manage-products.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZALUPA - Маркетплейс</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">ZALUPA</div>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Поиск...">
+                <button class="search-button">
+                    <img src="search-icon.svg" alt="Поиск">
+                </button>
+            </div>
+            <div class="nav-buttons">
+                <button class="login-btn">Войти</button>
+                <a href="#" class="instagram-icon">
+                    <img src="instagram-icon.svg" alt="Instagram">
+                </a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <aside class="sidebar">
+            <ul class="category-list">
+                <li class="category-item active">Все</li>
+                <li class="category-item selected">Одежда</li>
+                <li class="category-item">Техника</li>
+                <li class="category-item">Аксессуары</li>
+            </ul>
+        </aside>
+
+        <div class="content">
+            <div class="filters">
+                <div class="filter-dropdown">
+                    <span>Цена</span>
+                    <img src="arrow-down.svg" alt="Развернуть">
+                </div>
+            </div>
+
+            <div class="products-grid">
+                <!-- Product Card 1 -->
+                <div class="product-card" th:each="product: ${product}">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <div class="product-text"><span th:text="${product.getTitle()}"></span></div>
+                        <div class="product-price"><span th:text="${product.getPrice()}"></span>$</div>
+                    </div>
+                </div>
+                <!-- Product Card 2 -->
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <div class="product-text">TEXT</div>
+                        <div class="product-price">250 $</div>
+                    </div>
+                </div>
+                <!-- Product Card 3 -->
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <div class="product-text">TEXT</div>
+                        <div class="product-price">250 $</div>
+                    </div>
+                </div>
+                <!-- Product Card 4 -->
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <div class="product-text">TEXT</div>
+                        <div class="product-price">250 $</div>
+                    </div>
+                </div>
+                <!-- Product Card 5 -->
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <div class="product-text">TEXT</div>
+                        <div class="product-price">250 $</div>
+                    </div>
+                </div>
+                <!-- Product Card 6 -->
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <div class="product-text">TEXT</div>
+                        <div class="product-price">250 $</div>
+                    </div>
+                </div>
+                <!-- Product Card 7 -->
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <div class="product-text">TEXT</div>
+                        <div class="product-price">250 $</div>
+                    </div>
+                </div>
+                <!-- Product Card 8 -->
+                <div class="product-card">
+                    <div class="product-image"></div>
+                    <div class="product-info">
+                        <div class="product-text">TEXT</div>
+                        <div class="product-price">250 $</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
