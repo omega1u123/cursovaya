@@ -18,10 +18,15 @@
                 </button>
             </div>
             <div class="nav-buttons">
-                <button class="login-btn">Войти</button>
-                <a href="#" class="instagram-icon">
-                    <img src="instagram-icon.svg" alt="Instagram">
-                </a>
+                <div class="nav-buttons">
+                    <div th:each="user : ${user}">
+                        <span class="username" th:text="${user.getUsername()}"></span>
+                    </div>
+                    <button class="login-btn">Корзина</button>
+                    <form th:action="@{/logout}" method="post">
+                        <button class="login-btn">Выйти</button>
+                    </form>
+                </div>
             </div>
         </nav>
     </header>

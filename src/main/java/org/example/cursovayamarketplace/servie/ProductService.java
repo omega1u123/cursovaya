@@ -6,6 +6,7 @@ import org.example.cursovayamarketplace.domain.ProductRepository;
 import org.example.cursovayamarketplace.domain.UserRepository;
 import org.example.cursovayamarketplace.domain.model.CategoryEntity;
 import org.example.cursovayamarketplace.domain.model.ProductEntity;
+import org.example.cursovayamarketplace.domain.model.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,12 +20,9 @@ public class ProductService {
     private final UserRepository userRepository;
     private final CategoryRepository categoryRepository;
 
-    public void createProduct(String title, String description, String imageUrl, int price, int userId, String categoryName){
-
-        var user = userRepository.findById(userId).orElseThrow();
-
+    public void createProduct(String title, String description, String imageUrl, int price, String username, String categoryName){
+        var user = userRepository.findByUsername(username);
         var category = categoryRepository.findCategoryEntityByTitle(categoryName).orElseThrow();
-
         ProductEntity newProduct = new ProductEntity(
                 title,
                 description,
@@ -64,11 +62,16 @@ public class ProductService {
         return product;
     };
 
-    public void addProductToCart(int productId, int userId){
-        var user = userRepository.findById(userId).orElseThrow();
+    public void addProductToCart(int productId, String username){
+        var user = userRepository.findByUsername(username);
         var product = productRepository.findById(productId).orElseThrow();
         user.getCart().add(product);
         userRepository.save(user);
+    }
+
+    public List<ProductEntity> getByCategory(int categoryId){
+        var category = categoryRepository.findById(categoryId).orElseThrow();
+        return productRepository.findProductEntitiesByCategory(category);
     }
 
 }

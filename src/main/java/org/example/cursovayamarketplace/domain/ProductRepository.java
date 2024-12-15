@@ -1,5 +1,6 @@
 package org.example.cursovayamarketplace.domain;
 
+import org.example.cursovayamarketplace.domain.model.CategoryEntity;
 import org.example.cursovayamarketplace.domain.model.ProductEntity;
 import org.example.cursovayamarketplace.domain.model.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,5 +12,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
 
     List<ProductEntity> findProductEntitiesByUser(UserEntity user);
+
+    List<ProductEntity> findProductEntitiesByCategory(CategoryEntity category);
 
 }

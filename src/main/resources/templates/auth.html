@@ -14,13 +14,13 @@
             <div class="search-container">
                 <input type="text" class="search-input" placeholder="Поиск...">
                 <button class="search-button">
-                    <img th:src="@{/img/search-icon.svg}" alt="Поиск">
+                    <img src="/templates/img/search-icon.svg" alt="Поиск">
                 </button>
             </div>
             <div class="nav-buttons">
                 <button class="login-btn">Войти</button>
                 <a href="#" class="instagram-icon">
-                    <img th:src="@{/img/instagram-icon.svg}" alt="Instagram">
+                    <img src="/templates/img/instagram-icon.svg" alt="Instagram">
                 </a>
             </div>
         </nav>
@@ -34,18 +34,18 @@
             </div>
 
             <!-- Форма входа -->
-            <form class="auth-form login-form active">
+            <form method="post" class="auth-form login-form active" th:action="@{/auth/logInPage}">
                 <div class="form-group">
-                    <label for="login-email">Email</label>
-                    <input type="email" id="login-email" class="form-input" required>
+                    <label for="login-email">Логин</label>
+                    <input type="text" id="login-email" name="username" class="form-input" required>
                 </div>
 
                 <div class="form-group">
                     <label for="login-password">Пароль</label>
                     <div class="password-input">
-                        <input type="password" id="login-password" class="form-input" required>
+                        <input type="password" id="login-password" name="password" class="form-input" required>
                         <button type="button" class="toggle-password">
-                            <img th:src="@{/img/eye-icon.svg}" alt="Показать пароль">
+                            <img src="/templates/img/eye-icon.svg" alt="Показать пароль">
                         </button>
                     </div>
                 </div>
@@ -54,33 +54,18 @@
             </form>
 
             <!-- Форма регистрации -->
-            <form class="auth-form register-form">
+            <form method="post" class="auth-form register-form" th:action="@{/auth/register}">
                 <div class="form-group">
-                    <label for="register-name">Имя</label>
-                    <input type="text" id="register-name" class="form-input" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="register-email">Email</label>
-                    <input type="email" id="register-email" class="form-input" required>
+                    <label for="register-name">Логин</label>
+                    <input type="text" id="register-name" name="username" class="form-input" required>
                 </div>
 
                 <div class="form-group">
                     <label for="register-password">Пароль</label>
                     <div class="password-input">
-                        <input type="password" id="register-password" class="form-input" required>
+                        <input type="password" id="register-password" name="password" class="form-input" required>
                         <button type="button" class="toggle-password">
-                            <img th:src="@{/img/eye-icon.svg}" alt="Показать пароль">
-                        </button>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="register-confirm-password">Подтвердите пароль</label>
-                    <div class="password-input">
-                        <input type="password" id="register-confirm-password" class="form-input" required>
-                        <button type="button" class="toggle-password">
-                            <img th:src="@{/img/eye-icon.svg}" alt="Показать пароль">
+                            <img src="/templates/img/eye-icon.svg" alt="Показать пароль">
                         </button>
                     </div>
                 </div>
@@ -90,6 +75,335 @@
         </div>
     </main>
 
-    <script th:src="@{/js/auth.js}"></script>
 </body>
+<style>
+    .auth-page {
+        padding: 2rem;
+        min-height: calc(100vh - 70px);
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+    }
+
+    .auth-container {
+        width: 100%;
+        max-width: 400px;
+        background-color: #262626;
+        border-radius: 8px;
+        padding: 2rem;
+    }
+
+    .auth-tabs {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .tab-btn {
+        flex: 1;
+        padding: 0.75rem;
+        background-color: transparent;
+        border: none;
+        border-bottom: 2px solid #333;
+        color: #666;
+        cursor: pointer;
+        transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+        color: #4CAF50;
+        border-bottom-color: #4CAF50;
+    }
+
+    .auth-form {
+        display: none;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .auth-form.active {
+        display: flex;
+    }
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-group label {
+        color: white;
+        font-size: 0.9rem;
+    }
+
+    .form-input {
+        padding: 0.75rem 1rem;
+        background-color: #333;
+        border: 1px solid #444;
+        border-radius: 4px;
+        color: white;
+        font-size: 1rem;
+        transition: border-color 0.2s;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: #4CAF50;
+    }
+
+    .password-input {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+
+    .password-input .form-input {
+        width: 100%;
+        padding-right: 40px;
+    }
+
+    .toggle-password {
+        position: absolute;
+        right: 10px;
+        background: none;
+        border: none;
+        padding: 5px;
+        cursor: pointer;
+    }
+
+    .toggle-password img {
+        width: 20px;
+        height: 20px;
+        opacity: 0.5;
+        transition: opacity 0.2s;
+    }
+
+    .toggle-password:hover img {
+        opacity: 0.8;
+    }
+
+    .submit-btn {
+        padding: 1rem;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.2s;
+    }
+
+    .submit-btn:hover {
+        background-color: #45a049;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .auth-page {
+            padding: 1rem;
+        }
+
+        .auth-container {
+            margin: 0 1rem;
+        }
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+    }
+
+    body {
+        background-color: #1a1a1a;
+        color: white;
+    }
+
+    /* Navbar styles */
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem 2rem;
+        background-color: #1a1a1a;
+        border-bottom: 1px solid #333;
+    }
+
+    .logo {
+        color: #4CAF50;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    .search-container {
+        display: flex;
+        align-items: center;
+        flex-grow: 0.4;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        background-color: #333;
+        color: white;
+    }
+
+    .search-button {
+        background: none;
+        border: none;
+        margin-left: -30px;
+        cursor: pointer;
+    }
+
+    .nav-buttons {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .login-btn {
+        padding: 0.5rem 1.5rem;
+        background-color: #4CAF50;
+        border: none;
+        border-radius: 4px;
+        color: white;
+        cursor: pointer;
+    }
+
+    /* Main content styles */
+    main {
+        display: flex;
+        min-height: calc(100vh - 70px);
+    }
+
+    /* Sidebar styles */
+    .sidebar {
+        width: 200px;
+        padding: 2rem 1rem;
+        background-color: #1a1a1a;
+    }
+
+    .category-list {
+        list-style: none;
+    }
+
+    .category-item {
+        padding: 0.5rem 1rem;
+        margin-bottom: 0.5rem;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+
+    .category-item.selected {
+        background-color: #4CAF50;
+    }
+
+    /* Content styles */
+    .content {
+        flex-grow: 1;
+        padding: 2rem;
+    }
+
+    .filters {
+        margin-bottom: 2rem;
+    }
+
+    .filter-dropdown {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+    }
+
+    /* Products grid */
+    .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .product-card {
+        background-color: #262626;
+        border-radius: 8px;
+        overflow: hidden;
+        transition: transform 0.2s;
+    }
+
+    .product-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .product-image {
+        width: 100%;
+        height: 200px;
+        background-color: #333;
+    }
+
+    .product-info {
+        padding: 1rem;
+    }
+
+    .product-text {
+        margin-bottom: 0.5rem;
+    }
+
+    .product-price {
+        color: #4CAF50;
+        font-weight: bold;
+    }
+
+    /* Responsive design */
+    @media (max-width: 768px) {
+        .sidebar {
+            width: 100px;
+        }
+
+        .products-grid {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
+    }
+
+</style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Переключение между вкладками
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const forms = document.querySelectorAll('.auth-form');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Удаляем активный класс у всех кнопок и форм
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                forms.forEach(form => form.classList.remove('active'));
+
+                // Добавляем активный класс нужной кнопке и форме
+                button.classList.add('active');
+                const formClass = button.getAttribute('data-tab') + '-form';
+                document.querySelector('.' + formClass).classList.add('active');
+            });
+        });
+
+        // Показать/скрыть пароль
+        const toggleButtons = document.querySelectorAll('.toggle-password');
+
+        toggleButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const input = button.parentElement.querySelector('input');
+                const type = input.getAttribute('type');
+
+                if (type === 'password') {
+                    input.setAttribute('type', 'text');
+                    button.querySelector('img').style.opacity = '0.8';
+                } else {
+                    input.setAttribute('type', 'password');
+                    button.querySelector('img').style.opacity = '0.5';
+                }
+            });
+        });
+    });
+
+</script>
 </html>

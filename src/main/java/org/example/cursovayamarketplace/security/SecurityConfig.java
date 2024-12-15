@@ -18,17 +18,18 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .requestMatchers("/registration/*").permitAll()
+                .requestMatchers("/auth/register").permitAll()
                 .requestMatchers("/css/**").permitAll()
+                .requestMatchers("/img/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin(login -> login
-                        .loginPage("/auth/loginPage").permitAll()
-                        .defaultSuccessUrl("/catalog/catalogPage", true)
+                        .loginPage("/auth/logInPage").permitAll()
+                        .defaultSuccessUrl("/product", true)
                         .permitAll())
                 .logout(logout -> logout
                         .logoutUrl("/logout")
-                        .logoutSuccessUrl("/auth/loginPage")
+                        .logoutSuccessUrl("/auth")
                         .permitAll());
 
 
