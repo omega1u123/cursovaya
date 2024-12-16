@@ -10,7 +10,10 @@ import org.example.cursovayamarketplace.domain.model.UserEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+
+import static org.apache.catalina.security.SecurityUtil.remove;
 
 @Service
 @RequiredArgsConstructor
@@ -47,7 +50,15 @@ public class ProductService {
         return new ArrayList<>(productRepository.findAll());
     }
 
-    public void deleteProduct(int id){
+    public void deleteProduct(int id, String username){
+        List<ProductEntity> products = new ArrayList<>();
+        var product = productRepository.findById(id).get();
+        products.add(product);
+        var users = userRepository.findAllByCart(products);
+        for(UserEntity u: users){
+            u.getCart().remove(product);
+        }
+        userRepository.saveAll(users);
         productRepository.deleteById(id);
     }
 
